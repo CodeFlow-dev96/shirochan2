@@ -476,7 +476,7 @@ async function sendToAPI(prompt){
   try{
     const res=await fetch('https://shirochan-api.zaranga20.workers.dev',{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:scSystem,messages:[...msgs,{role:'user',content:prompt}].slice(-14)})
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:SYSTEM,messages:[...msgs,{role:'user',content:prompt}].slice(-14)})
     });
     const data=await res.json();removeTyping();
     const reply=data.content&&data.content[0]&&data.content[0].text;
