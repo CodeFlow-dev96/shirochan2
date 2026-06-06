@@ -303,7 +303,7 @@ async function askClaudeWithMap(userText, catIcon){
     const res=await fetch(CLAUDE_API,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:SYSTEM,messages:[...messages,{role:'user',content:userText}].slice(-14)})
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,messages:[{role:'system',content:SYSTEM},[...messages,{role:'user',content:userText}].slice(-14)})
     });
     const data=await res.json();
     removeTyping();
@@ -339,7 +339,7 @@ async function askClaude(userText, saveUser=true){
     const res=await fetch(CLAUDE_API,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:SYSTEM,messages:messages.slice(-14)})
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,messages:[{role:'system',content:SYSTEM},messages.slice(-14)})
     });
     const data=await res.json();
     removeTyping();
