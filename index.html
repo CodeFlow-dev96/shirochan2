@@ -479,7 +479,7 @@ async function sendToAPI(prompt){
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:SYSTEM,messages:[...msgs,{role:'user',content:prompt}].slice(-14)})
     });
     const data=await res.json();removeTyping();
-    const reply=data.content&&data.content[0]&&data.content[0].text;
+    const reply= data.choices&&data.choices[0]&&data.choices[0].message&&data.choices[0].message.content;
     if(!reply)throw new Error('empty');
     msgs.push({role:'assistant',content:reply});
     const wrapper=addBotMsg(fmt(reply));
